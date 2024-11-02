@@ -1,0 +1,104 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <style>
+
+        body{
+            background-image: url(/static/images/e20.png);
+            background-size: cover;
+        }
+        .container input{
+            border-radius: 5px;
+            border-color: rgba(127, 255, 212, 0.409);
+        }
+        .box{
+        background-color:rgba(255, 255, 255, 0.889);
+        margin: auto;
+        width: 450px;
+        height: 550px;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: hsl(210, 10%, 80%) 0 0 16px;
+        border: 1px;
+        border-style: solid;
+        border-color:#ffffff;
+        margin-top: 45px;
+        margin-bottom: 40px;
+        }
+        form{
+            margin-top: 55px;
+        }
+        .buttonn{
+            color: azure;
+            border-radius: 5px;
+        }
+        .in{
+            border-radius: 5px;
+            border-color: antiquewhite;
+            padding: 3px;
+            margin: 1.5px;
+        }
+        a{
+            text-decoration: none;
+            
+        }
+        
+    </style>
+
+        {% for message in messages %}
+        <p style="color: rgb(3, 255, 37);">{{message}}</p>
+        {% endfor %}
+
+    </head>
+
+    <body>
+
+        <div class="box">
+            <form action method="post">
+                <h2 class="mt-4"
+                    style="font-family:unset, 'Trebuchet MS', sans-serif; font-weight:600">
+                    Reg
+                    Form</h2><br>
+
+                {% csrf_token %}
+
+                <label for><b>Name</b></label>
+                <input style="border-color: white;" class="in" type="text"
+                    name="username" placeholder="Enter the username"><br><br>
+
+                <label for><b>E-mail</b></label>
+                <input style="border-color: white;" class="in" type="e-mail"
+                    name="email" placeholder="Enter the email"><br><br>
+
+                <label for><b>Password</b></label>
+                <input style="border-color: white;" class="in" type="password"
+                    name="password" placeholder="Enter the password"><br><br>
+
+                <label for><b>Conform password</b></label>
+                <input style="border-color: white;" class="in" type="password"
+                    name="password2"
+                    placeholder="Enter the password"><br><br><br>
+
+                <button class="buttonn btn btn-primary"
+                    type="submit">Register</button><br><br>
+                <p style="margin-top: 20px; color:black;">Have an account? <a
+                        href="{% url 'signin' %}">Sign in </a></p>
+
+            </form>
+        </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Ecom</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+
+    <style>
+      /* HOME PAGE */
+
+      body {
+        background-color: hsl(0, 0%, 98%);
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .e1 {
+        height: 80px;
+      }
+      .e2 {
+        padding: 10px;
+        font-size: 26px;
+      }
+      .e5 {
+        font-weight: 490;
+      }
+      .e6 {
+        font-weight: 450;
+      }
+
+      .e8 {
+        max-width: 100%; /* Ensures the image never exceeds the container width */
+        height: auto; /* Maintains aspect ratio */
+      }
+
+
+      #cart-icon {
+        width: 25px;
+        display: inline-block;
+        /* margin-left: 15px; */
+      }
+
+      #cart-total {
+        font-size: 1rem;
+        margin-left: 5px;
+      }
+
+      /* Style adjustments for smaller screens */
+      @media (max-width: 576px) {
+        #cart-icon {
+          width: 20px;
+          height: 20px;
+        }
+
+        #cart-total {
+          font-size: 0.85rem;
+        }
+      }
+
+      /* ----------BOX DESIGN----------- */
+
+      section {
+        mini-height: 100vh;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: hsl(0, 0%, 30%);
+      }
+
+      .box-element {
+        box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 20px;
+      }
+
+      .thumbnail {
+        width: 100%;
+        height: 200px;
+        -webkit-box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
+        -moz-box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
+        box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
+      }
+
+      .product {
+        border-radius: 0 0 4px 4px;
+      }
+
+      .bg-dark {
+        background-color: #4f868c !important;
+      }
+
+      #cart-icon {
+        width: 25px;
+        display: inline-block;
+        /* margin-left: 15px; */
+      }
+
+      #cart-total {
+        display: block;
+        text-align: center;
+        color: #fff;
+        background-color: red;
+        width: 20px;
+        height: 25px;
+        border-radius: 50%;
+        font-size: 14px;
+      }
+
+      .col-lg-4,
+      .col-lg-6,
+      .col-lg-8,
+      .col-lg-12 {
+        margin-top: 10px;
+      }
+
+      .btn {
+        border-radius: 0;
+      }
+
+      .row-image {
+        width: 100px;
+      }
+
+      .form-field {
+        width: 250px;
+        display: inline-block;
+        padding: 5px;
+      }
+
+      .cart-row {
+        display: flex;
+        align-items: flex-stretch;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ececec;
+      }
+
+      .quantity {
+        display: inline-block;
+        font-weight: 700;
+        padding-right: 10px;
+      }
+
+      .chg-quantity {
+        width: 12px;
+        cursor: pointer;
+        display: block;
+        margin-top: 5px;
+        transition: 0.1s;
+      }
+
+      .chg-quantity:hover {
+        opacity: 0.6;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      /* FOOTER */
+
+      /* Basic Footer Styles */
+      .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      .footer h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .footer p,
+      .footer a {
+        font-size: 0.9rem;
+        color: #ccc;
+      }
+
+      .footer a:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      /* Footer Container */
+      .footer-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .footer-section {
+        flex: 1 1 250px;
+        padding: 15px;
+        text-align: left;
+      }
+
+      /* Footer Links */
+      .footer ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer li {
+        margin: 5px 0;
+      }
+
+      /* Copyright Section */
+      .copyright {
+        border-top: 1px solid #444;
+        padding: 10px;
+        font-size: 0.8rem;
+        color: #aaa;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .footer-container {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .footer-section {
+          margin-bottom: 20px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .footer h3 {
+          font-size: 1rem;
+        }
+
+        .footer p,
+        .footer a {
+          font-size: 0.85rem;
+        }
+      }
+
+      /* RESPONSIVE CSS */
+    </style>
+
+    <script type="text/javascript">
+      var user = "{{request.user}}";
+
+      function getToken(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          var cookies = document.cookie.split(";");
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      var csrftoken = getToken("csrftoken");
+
+      function getCookie(name) {
+        // Split cookie string and get all individual name=value pairs in an array
+        var cookieArr = document.cookie.split(";");
+
+        // Loop through the array elements
+        for (var i = 0; i < cookieArr.length; i++) {
+          var cookiePair = cookieArr[i].split("=");
+
+          /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+          if (name == cookiePair[0].trim()) {
+            // Decode the cookie value and return
+            return decodeURIComponent(cookiePair[1]);
+          }
+        }
+
+        // Return null if not found
+        return null;
+      }
+      var cart = JSON.parse(getCookie("cart"));
+
+      if (cart == undefined) {
+        cart = {};
+        console.log("Cart Created!", cart);
+        document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+      }
+      console.log("Cart:", cart);
+    </script>
+  </head>
+  <body>
+    {% comment %} --------NAVBAR------------------------------- {% endcomment %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <a
+        class="navbar-brand"
+        href="{% url 'main' %}"
+        style="
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+            sans-serif;
+        "
+      >
+        D-OCTOSMART
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        style="gap: 7px"
+        id="navbarSupportedContent"
+      >
+        <!-- Left-aligned Links -->
+
+        <div class="navbar-nav" style="gap: 7px">
+          <a
+            style="margin-left: 0px"
+            class="nav-item nav-link btn btn-warning mx-1 text-light"
+            href="{% url 'main' %}"
+            style="border-radius: 4px"
+            >Home</a
+          >
+
+          <a
+            class="nav-item nav-link btn btn-warning mx-1 text-light"
+            href="{% url 'signin' %}"
+            style="border-radius: 4px"
+            >Store</a
+          >
+        </div>
+
+        <!-- Right-aligned Links -->
+        <div class="navbar-nav align-items-center">
+          <a
+            class="nav-item nav-link btn btn-primary mx-1 text-light"
+            href="{% url 'signin' %}"
+            style="border-radius: 4px"
+            >Login</a
+          >
+
+          <!-- Cart Icon with Item Count -->
+          <a class="nav-item nav-link" href="{% url 'cart' %}">
+            <img
+              id="cart-icon"
+              src="{% static 'images/cart.png' %}"
+              alt="Cart Icon"
+              style="width: 24px; height: 24px; margin: 0"
+            />
+          </a>
+
+          <span id="cart-total" class="nav-item text-white">{{cartItems}}</span>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+
+    <div class="e7 text-center">
+      <img
+        class="img-fluid e8 w-100"
+        style="max-height: 670px"
+        src="{% static 'images/e20.png' %}"
+        alt="Responsive Image"
+      />
+    </div>
+
+    <!-- CARDSS -->
+    <section style="background-color: #fff">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="sectionheader text-center mt-5">
+              <h2 class="mb-5 text-danger">Latest Products</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Shoe Card -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card p-3 h-100 shadow-sm">
+              <div class="card-body">
+                <img
+                  class="img-fluid w-100 mb-3"
+                  src="{% static 'images/e10.jpg' %}"
+                  alt="Shoe"
+                />
+                <div class="gammu card-title text-center">
+                  <h4>Shoe</h4>
+                  <p class="m-2">
+                    We cut shoes in half to see what's inside and do accurate
+                    tests. Our lab assesses over 20 parameters for each shoe.
+                  </p>
+                  <a href="{% url 'signin' %}" class="btn btn-danger"
+                    >See More</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Headphone Card -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card p-3 h-100 shadow-sm">
+              <div class="card-body">
+                <img
+                  class="img-fluid w-100 mb-3"
+                  src="{% static 'images/headphones.jpg' %}"
+                  alt="Headphone"
+                />
+                <div class="gammu card-title text-center">
+                  <h4>Headphone</h4>
+                  <p class="m-1">
+                    JLab Rewind 2 Wireless Retro Headphones, 20+ Hours Playtime,
+                    App Support, Bluetooth Multipoint + Wireless Sharing, Hi-Fi
+                    Sound.
+                  </p>
+                  <a href="{% url 'signin' %}" class="btn btn-danger"
+                    >See More</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Watch Card -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card p-3 h-100 shadow-sm">
+              <div class="card-body">
+                <img
+                  class="img-fluid w-100 mb-3"
+                  src="{% static 'images/e14.png' %}"
+                  alt="Watch"
+                />
+                <div class="gammu card-title text-center">
+                  <h4>Watch</h4>
+                  <p class="m-2">
+                    Men's and Women's Watches: Fashion Smartwatches, Wearable
+                    Technology, and Wrist Watches.
+                  </p>
+                  <a href="{% url 'signin' %}" class="btn btn-danger"
+                    >See More</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% endblock content %} <br /><br />
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <p>
+            An e-commerce website that allows people to buy and sell goods,
+            services, and digital products over the internet.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>Phone: 6282195382</p>
+          <p>
+            Email: <a href="mailto:info@example.com">vishnu155@gmail.com</a>
+          </p>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2024 Vishnu Company. All rights reserved.
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+  </body>
+</html>
