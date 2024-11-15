@@ -7,6 +7,8 @@ import json
 import datetime
 from .models import * 
 from .utils import cookieCart, cartData, guestOrder
+import razorpay
+
 
 
 def main(request):
@@ -69,6 +71,32 @@ def store(request):
 	return render(request, 'store/store.html',context)
 
 
+
+# PAYMENT 1
+
+def payment(request):
+    return render(request,'store/payment.html')
+
+
+
+
+#PAYMEMT 2
+def home1(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        amount = 500
+
+        client = razorpay.Client(
+            auth=("rzp_test_JAeLcxoJpwFjEq", "PvjOeaEQA5b2gH4XHxEGEhMB"))
+
+        payment = client.order.create({'amount': amount, 'currency': 'INR',
+                                       'payment_capture': '1'})
+    return render(request, 'payment.html')
+
+
+
+
+
 # CART
 
 def cart(request):
@@ -94,7 +122,8 @@ def checkout(request):
 	context = {'items':items, 'order':order, 'cartItems':cartItems}
 	return render(request, 'store/checkout.html', context)
 
-# UPDATEITEM
+
+# UPDATE ITEM
 
 def updateItem(request):
 	data = json.loads(request.body)
@@ -123,7 +152,7 @@ def updateItem(request):
 
 
 
-
+# PROCESS ORDER
 
 def processOrder(request):
 	transaction_id = datetime.datetime.now().timestamp()

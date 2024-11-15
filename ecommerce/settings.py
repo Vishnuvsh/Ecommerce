@@ -51,6 +51,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SECRET_KEY = 'django-insecure-^v@7k6&d^4##5ste^5m_8gubdm8_@cct$1n&&#yfi*z#p@_(+7'
+
+
 ROOT_URLCONF = 'ecommerce.urls'
 
 TEMPLATES = [
