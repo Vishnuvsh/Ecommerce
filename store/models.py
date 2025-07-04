@@ -1,33 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
+from django.conf import settings
 
 # Create your models here.
 
 # REGISTER
 
-class Register(models.Model):
-    username=models.CharField(max_length=20,null=True)
-    email=models.EmailField(max_length=50,null=True)
-    password=models.IntegerField(null=True)
-    password2=models.IntegerField(null=True)
+class Register(AbstractUser):
+    username = models.CharField(max_length=150, unique=True)
     
     def __str__(self):
         return self.username
        
-# SIGNIN
-
-class Sigin(models.Model):
-    username=models.CharField(max_length=20,null=True)
-    password=models.IntegerField(null=True)
-    
-    def __str__(self):
-        return self.username
-    
-    
 # OTHERS
 
 class Customer(models.Model):
-	user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+	
+	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	name = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200)
 
@@ -61,6 +50,7 @@ class Order(models.Model):
 	def __str__(self):
 		return str(self.id)
 		
+  
 	@property
 	def shipping(self):
 		shipping = False
@@ -104,3 +94,5 @@ class ShippingAddress(models.Model):
 
 	def __str__(self):
 		return self.address
+
+

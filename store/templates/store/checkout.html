@@ -28,11 +28,6 @@
 	</div><br>
 
 	<br>
-	<div class="box-element hidden" id="payment-info">
-		<small>Paypal Options</small>
-		<button id="make-payment">Make payment</button>
-		<div id="paypal-button-container"></div>
-	</div>
 
 	<div class="col-lg-6" style="  margin-top: -5px;">
 		<div class="boxx p-5"
@@ -50,7 +45,7 @@
 					</div>
 				</div>
 
-				<div class="text-center bg-info" style="height: 460px;"
+				<div class="text-center bg-secondary" style="height: 460px;"
 					id="shipping-info"><br>
 
 					<p><strong>Shipping Information</strong></p><br>
@@ -71,8 +66,7 @@
 						<input class="form-control" type="text" name="country"
 							placeholder="Zip code">
 					</div><br><br><br>
-					<input style="border-radius: 5px; width: 250px; margin-left: 199px;" id="form-button" class="btn btn-secondary btn-block" type="submit"
-							value="Continue">
+					<a class="btn btn-warning" href="{% url 'payment' %}">Continue</a>
 				</div>
 
 			</form>

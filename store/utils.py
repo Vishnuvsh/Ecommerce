@@ -55,6 +55,8 @@ def cartData(request):
 
 	return {'cartItems':cartItems ,'order':order, 'items':items}
 
+
+
 	
 def guestOrder(request, data):
 	name = data['form']['name']
@@ -82,3 +84,4 @@ def guestOrder(request, data):
 			quantity=(item['quantity'] if item['quantity']>0 else -1*item['quantity']), # negative quantity = freebies
 		)
 	return customer, order
+

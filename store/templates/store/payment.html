@@ -40,21 +40,21 @@
         padding-top: 30px;
     }
 </style>
-<body>
+<body style="background-image: url(/static/images/istockphoto-2170287353-2048x2048.jpg);">
 
-    <div class="profile">
+    <div class="profile" style="text-align: center;">
         <div class="container">
-            <h1>Make <span style="color:#03c04a;">Payment</span></h1>
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="{% static '/pay.png' %}" alt="Contact Image" class="img-fluid">
+            <h1><strong>Make</strong> <span style="color:#03c04a;"><strong>Payment</strong></span></h1>
+            <div class="row" style=" width:800px; height:300; margin-top:70px; ">
+                <div class="col-md-6" style="width: 900px;">
+                    <img src="{% static '/pay.png' %}" alt="" class="img-fluid">
                 </div>
                 <div class="col-md-6">
                     <div class="card">
-                        <form action="success" method="post" >
+                        <form action="success" method="post"  style="text-align: center; margin:80px; ">
                             {% csrf_token %}
-                            <div class="card-body">   
-                                <h5 class="card-title">Service Type: <b>{{ wastetype }}</b></h5>
+                            <div class="card-body m-3">   
+                                <h5 class="card-title" style="font-size: 23px;">Service Type: <b>{{ wastetype }}</b></h5>
                                 <h5 class="card-title">Total Weight: <b>{{ weight }} kg</b></h5>
                                 <h5 class="card-title">Minimum Service Charge: <b>Rs. 100/-</b></h5>
                             </div>

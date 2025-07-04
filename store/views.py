@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.http import JsonResponse
 import json
 import datetime
-from .models import * 
+from store.models import * 
 from .utils import cookieCart, cartData, guestOrder
 import razorpay
 
@@ -27,11 +27,14 @@ def signin(request):
             return redirect('store')
         else:
             messages.info(request, " username or password is incorrect ")
-            return redirect('store/signin.html')
+            return redirect('signin')
     return render(request,'store/signin.html')
 
 
 # REGISTER
+
+def regpage(request):
+    return render(request,'store/regi.html')
 
 def regi(request):
     if request.method=='POST':
@@ -40,15 +43,15 @@ def regi(request):
         email=request.POST['email']
         password=request.POST['password']
         password2=request.POST['password2']
-        if User.objects.filter(username=username).exists():
+        if Register.objects.filter(username=username).exists():
             messages.info(request,"username is already exists")
             return redirect("regi")
         
-        if User.objects.filter(email=email).exists():
+        if Register.objects.filter(email=email).exists():
             messages.info(request,"email is already exists")
             return redirect("regi")
         else:
-            user=User.objects.create_user(username=username,email=email,password=password)
+            user=Register.objects.create_user(username=username,email=email,password=password)
             user.set_password(password)
             
             user.save()
@@ -60,15 +63,18 @@ def regi(request):
 # STORE
 
 def store(request):
-	data = cartData(request)
+    if request.user.is_authenticated:
+        customer, created = Customer.objects.get_or_create(user=request.user)
+    
+    data = cartData(request)
 
-	cartItems = data['cartItems']
-	order = data['order']
-	items = data['items']
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
-	products = Product.objects.all()
-	context = {'products':products, 'cartItems':cartItems}
-	return render(request, 'store/store.html',context)
+    products = Product.objects.all()
+    context = {'products': products, 'cartItems': cartItems}
+    return render(request, 'store/store.html', context)
 
 
 
@@ -84,7 +90,7 @@ def payment(request):
 def home1(request):
     if request.method == "POST":
         name = request.POST.get('name')
-        amount = 500
+        amount = 1000
 
         client = razorpay.Client(
             auth=("rzp_test_JAeLcxoJpwFjEq", "PvjOeaEQA5b2gH4XHxEGEhMB"))
@@ -182,3 +188,5 @@ def processOrder(request):
 		)
 
 	return JsonResponse('Payment submitted..', safe=False)
+
+
